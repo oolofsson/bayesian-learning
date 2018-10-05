@@ -4,15 +4,15 @@
 # # Lab 3: Bayes Classifier and Boosting
 
 # ## Jupyter notebooks
-# 
+#
 # In this lab, you can use Jupyter <https://jupyter.org/> to get a nice layout of your code and plots in one document. However, you may also use Python as usual, without Jupyter.
-# 
+#
 # If you have Python and pip, you can install Jupyter with `sudo pip install jupyter`. Otherwise you can follow the instruction on <http://jupyter.readthedocs.org/en/latest/install.html>.
-# 
+#
 # And that is everything you need! Now use a terminal to go into the folder with the provided lab files. Then run `jupyter notebook` to start a session in that folder. Click `lab3.ipynb` in the browser window that appeared to start this very notebook. You should click on the cells in order and either press `ctrl+enter` or `run cell` in the toolbar above to evaluate all the expressions.
 
 # ## Import the libraries
-# 
+#
 # In Jupyter, select the cell below and press `ctrl + enter` to import the needed libraries.
 # Check out `labfuns.py` if you are interested in the details.
 
@@ -24,7 +24,7 @@ import random
 
 
 # ## Bayes classifier functions to implement
-# 
+#
 # The lab descriptions state what each function should do.
 
 
@@ -44,7 +44,7 @@ def computePrior(labels, W=None):
 
     # TODO: compute the values of prior for each class!
     # ==========================
-    
+
     # ==========================
 
     return prior
@@ -57,7 +57,7 @@ def computePrior(labels, W=None):
 def mlParams(X, labels, W=None):
     assert(X.shape[0]==labels.shape[0])
     Npts,Ndims = np.shape(X)
-    classes = np.unique(labels)
+    classes = np.unique(labels) # fetches all unique elements from labels
     Nclasses = np.size(classes)
 
     if W is None:
@@ -66,11 +66,15 @@ def mlParams(X, labels, W=None):
     mu = np.zeros((Nclasses,Ndims))
     sigma = np.zeros((Nclasses,Ndims,Ndims))
 
-    # TODO: fill in the code to compute mu and sigma!
-    # ==========================
-    
-    # ==========================
+    # calculate μ and sigma
+    for i in range(0,Nclasses):
+        k = np.where(labels == i)[0]    # finds the value of k where labels matches the current value of i
+        wVal = W[k, :]  # gets w pair at posotion k
+        xVal = X[k, :]  # gets x pair at posotion k
+        mu[i] = sum(xVal * wVal)/sum(wVal)  # compute the value of μ[i] as specified in the lab instructions
+        sigma[i] = np.diag(sum(np.square(xVal - mu[i]) * wVal) / sum(wVal)) # use np.diag to get circle markings for all classes
 
+    # return the created matrix
     return mu, sigma
 
 # in:      X - N x d matrix of M data points
@@ -86,9 +90,9 @@ def classifyBayes(X, prior, mu, sigma):
 
     # TODO: fill in the code to compute the log posterior logProb!
     # ==========================
-    
+
     # ==========================
-    
+
     # one possible way of finding max a-posteriori once
     # you have computed the log posterior
     h = np.argmax(logProb,axis=0)
@@ -115,7 +119,7 @@ class BayesClassifier(object):
 
 
 # ## Test the Maximum Likelihood estimates
-# 
+#
 # Call `genBlobs` and `plotGaussian` to verify your estimates.
 
 
@@ -139,7 +143,7 @@ plotGaussian(X,labels,mu,sigma)
 
 
 # ## Boosting functions to implement
-# 
+#
 # The lab descriptions state what each function should do.
 
 
@@ -168,10 +172,10 @@ def trainBoost(base_classifier, X, labels, T=10):
 
         # TODO: Fill in the rest, construct the alphas etc.
         # ==========================
-        
+
         # alphas.append(alpha) # you will need to append the new alpha
         # ==========================
-        
+
     return classifiers, alphas
 
 # in:       X - N x d matrix of N data points
@@ -192,7 +196,7 @@ def classifyBoost(X, classifiers, alphas, Nclasses):
         # TODO: implement classificiation when we have trained several classifiers!
         # here we can do it by filling in the votes vector with weighted votes
         # ==========================
-        
+
         # ==========================
 
         # one way to compute yPred after accumulating the votes
@@ -221,7 +225,7 @@ class BoostClassifier(object):
 
 
 # ## Run some experiments
-# 
+#
 # Call the `testClassifier` and `plotBoundary` functions for this part.
 
 
@@ -263,7 +267,7 @@ class BoostClassifier(object):
 
 
 # ## Bonus: Visualize faces classified using boosted decision trees
-# 
+#
 # Note that this part of the assignment is completely voluntary! First, let's check how a boosted decision tree classifier performs on the olivetti data. Note that we need to reduce the dimension a bit using PCA, as the original dimension of the image vectors is `64 x 64 = 4096` elements.
 
 
@@ -292,4 +296,3 @@ class BoostClassifier(object):
 # visualize the test point together with the training points used to train
 # the class that the test point was classified to belong to
 #visualizeOlivettiVectors(xTr[yTr == yPr[testind],:], xTe[testind,:])
-
