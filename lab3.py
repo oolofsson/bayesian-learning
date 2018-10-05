@@ -70,6 +70,7 @@ def mlParams(X, labels, W=None):
     mu = np.zeros((Nclasses,Ndims))
     sigma = np.zeros((Nclasses,Ndims,Ndims))
 
+    # ==========================
     # calculate μ and sigma
     for i in range(0,Nclasses):
         k = np.where(labels == i)[0]    # finds the value of k where labels matches the current value of i
@@ -79,7 +80,8 @@ def mlParams(X, labels, W=None):
         # This allows us to further simplify the expression for
         # the covariance matrix at diagonal indices (m, m) and (m, n), m 6 = n
         sigma[i] = np.diag(sum(np.square((xVal) - mu[i]))/findKCount(labels,i))
-    # return the created matrix
+        # return the created matrix
+    # ==========================
     return mu, sigma
 
 # in:      X - N x d matrix of M data points
@@ -93,10 +95,20 @@ def classifyBayes(X, prior, mu, sigma):
     Nclasses,Ndims = np.shape(mu)
     logProb = np.zeros((Nclasses, Npts))
 
-    # TODO: fill in the code to compute the log posterior logProb!
-    # ==========================
+    delta = np.zeros((len(X)))
 
     # ==========================
+    for i in range(0, Npts): # for every data point
+        tdp = X[i] # tdp = this data point
+        for j in range(0, Nclasses): # for every class
+            sDet = np.linalg.det(sigma[j]) #sigma determinant for j
+            sInv = np.linalg.inv(sigma[j]) # sigma determinant for j
+            tdmcm = tdp - mu[j] # tdmcm = this datapoint minus class mean
+
+            # formula 11
+            logProb[j][i] = -1/2*np.log(sDet) -1/2* np.dot(np.dot(tdmcm, sInv), np.transpose(tdmcm)) + np.log(prior[j])
+    # ==========================
+
 
     # one possible way of finding max a-posteriori once
     # you have computed the log posterior
@@ -132,7 +144,10 @@ X, labels = genBlobs(centers=5)
 mu, sigma = mlParams(X,labels)
 #test = computePrior(labels) #test function call
 plotGaussian(X,labels,mu,sigma)
+prior = computePrior(labels)
+classifyBayes(X, prior, mu, sigma)
 
+#testClassifier(BayesClassifier(), dataset='iris, split=0.7)
 
 # Call the `testClassifier` and `plotBoundary` functions for this part.
 
