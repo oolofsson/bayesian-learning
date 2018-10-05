@@ -27,6 +27,13 @@ import random
 #
 # The lab descriptions state what each function should do.
 
+# find the number of occurences of k within the list labels
+def findKCount(labels, k):
+    count = 0;
+    for i in range(0,len(labels)):
+        if labels[i] == k:
+            count = count + 1
+    return count
 
 # NOTE: you do not need to handle the W argument for this part!
 # in: labels - N vector of class labels
@@ -42,11 +49,8 @@ def computePrior(labels, W=None):
 
     prior = np.zeros((Nclasses,1))
 
-    # TODO: compute the values of prior for each class!
-    # ==========================
-
-    # ==========================
-
+    for i in range(0,len(prior)):
+        prior[i] = findKCount(labels, i)/len(labels)
     return prior
 
 # NOTE: you do not need to handle the W argument for this part!
@@ -71,9 +75,10 @@ def mlParams(X, labels, W=None):
         k = np.where(labels == i)[0]    # finds the value of k where labels matches the current value of i
         wVal = W[k, :]  # gets w pair at posotion k
         xVal = X[k, :]  # gets x pair at posotion k
-        mu[i] = sum(xVal * wVal)/sum(wVal)  # compute the value of μ[i] as specified in the lab instructions
-        sigma[i] = np.diag(sum(np.square(xVal - mu[i]) * wVal) / sum(wVal)) # use np.diag to get circle markings for all classes
-
+        mu[i] = sum(xVal)/findKCount(labels, i)  # compute the value of μ[i] as specified in the lab instructions
+        # This allows us to further simplify the expression for
+        # the covariance matrix at diagonal indices (m, m) and (m, n), m 6 = n
+        sigma[i] = np.diag(sum(np.square((xVal) - mu[i]))/findKCount(labels,i))
     # return the created matrix
     return mu, sigma
 
@@ -125,6 +130,7 @@ class BayesClassifier(object):
 
 X, labels = genBlobs(centers=5)
 mu, sigma = mlParams(X,labels)
+#test = computePrior(labels) #test function call
 plotGaussian(X,labels,mu,sigma)
 
 
