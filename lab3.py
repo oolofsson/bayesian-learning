@@ -143,24 +143,25 @@ class BayesClassifier(object):
 X, labels = genBlobs(centers=5)
 mu, sigma = mlParams(X,labels)
 #test = computePrior(labels) #test function call
-plotGaussian(X,labels,mu,sigma)
+#plotGaussian(X,labels,mu,sigma)
 prior = computePrior(labels)
-classifyBayes(X, prior, mu, sigma)
 
-#testClassifier(BayesClassifier(), dataset='iris, split=0.7)
+#testClassifier(BayesClassifier(), dataset='iris', split=0.7)
 
 # Call the `testClassifier` and `plotBoundary` functions for this part.
 
 
-#testClassifier(BayesClassifier(), dataset='iris', split=0.7)
-
-
+testClassifier(BayesClassifier(), dataset='iris', split=0.7)
+plotBoundary(BayesClassifier(), dataset='iris',split=0.7)
 
 #testClassifier(BayesClassifier(), dataset='vowel', split=0.7)
+#plotBoundary(BayesClassifier(), dataset='vowel', split=0.7)
+
+#testClassifier(BayesClassifier(), dataset='wine', split=0.7)
+#plotBoundary(BayesClassifier(), dataset='wine',split=0.7)
 
 
 
-#plotBoundary(BayesClassifier(), dataset='iris',split=0.7)
 
 
 # ## Boosting functions to implement
