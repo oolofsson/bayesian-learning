@@ -76,7 +76,7 @@ def mlParams(X, labels, W=None):
         k = np.where(labels == i)[0]    # finds the value of k where labels matches the current value of i
         wVal = W[k, :]  # gets w pair at posotion k
         xVal = X[k, :]  # gets x pair at posotion k
-        mu[i] = sum(xVal*wVal)/findKCount(labels, i)  # compute the value of μ[i] as specified in the lab instructions
+        mu[i] = sum(xVal)/findKCount(labels, i)  # compute the value of μ[i] as specified in the lab instructions
         # This allows us to further simplify the expression for
         # the covariance matrix at diagonal indices (m, m) and (m, n), m 6 = n
         sigma[i] = np.diag(sum(np.square((xVal) - mu[i]))/findKCount(labels,i))
@@ -162,16 +162,19 @@ class BayesClassifier(object):
 # Call `genBlobs` and `plotGaussian` to verify your estimates.
 
 
+# test function
 weights=[]
 for h in range(0,200):
-    weights.append([0.02])
+    weights.append([1/200])
 
 weights = np.array(weights)
-print(weights)
 
 X, labels = genBlobs(centers=5)
-print(X)
-mu, sigma = mlParams2(X,labels,weights)
+mu, sigma = mlParams2(X,labels, weights)
+
+
+
+
 #test = computePrior(labels) #test function call
 plotGaussian(X,labels,mu,sigma)
 prior = computePrior(labels)
