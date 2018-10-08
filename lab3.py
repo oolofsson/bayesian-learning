@@ -76,12 +76,34 @@ def mlParams(X, labels, W=None):
         k = np.where(labels == i)[0]    # finds the value of k where labels matches the current value of i
         wVal = W[k, :]  # gets w pair at posotion k
         xVal = X[k, :]  # gets x pair at posotion k
-        mu[i] = sum(xVal)/findKCount(labels, i)  # compute the value of μ[i] as specified in the lab instructions
+        mu[i] = sum(xVal*wVal)/findKCount(labels, i)  # compute the value of μ[i] as specified in the lab instructions
         # This allows us to further simplify the expression for
         # the covariance matrix at diagonal indices (m, m) and (m, n), m 6 = n
         sigma[i] = np.diag(sum(np.square((xVal) - mu[i]))/findKCount(labels,i))
         # return the created matrix
     # ==========================
+    return mu, sigma
+
+
+# updated version of mlParams which takes weights into account
+def mlParams2(X, labels, W):
+    assert(X.shape[0]==labels.shape[0])
+    Npts,Ndims = np.shape(X)
+    classes = np.unique(labels) # fetches all unique elements from labels
+    Nclasses = np.size(classes)
+
+    if W is None:
+        W = np.ones((Npts,1))/float(Npts)
+
+    mu = np.zeros((Nclasses,Ndims))
+    sigma = np.zeros((Nclasses,Ndims,Ndims))
+
+    for i in range(0,Nclasses):
+        k = np.where(labels == i)[0]
+        wVal = W[k, :]
+        xVal = X[k, :]
+        mu[i] = sum(xVal*wVal)/sum(wVal)
+        sigma[i] = np.diag(sum(np.square((xVal) - mu[i])*wVal)/sum(wVal))
     return mu, sigma
 
 # in:      X - N x d matrix of M data points
@@ -140,10 +162,18 @@ class BayesClassifier(object):
 # Call `genBlobs` and `plotGaussian` to verify your estimates.
 
 
+weights=[]
+for h in range(0,200):
+    weights.append([0.02])
+
+weights = np.array(weights)
+print(weights)
+
 X, labels = genBlobs(centers=5)
-mu, sigma = mlParams(X,labels)
+print(X)
+mu, sigma = mlParams2(X,labels,weights)
 #test = computePrior(labels) #test function call
-#plotGaussian(X,labels,mu,sigma)
+plotGaussian(X,labels,mu,sigma)
 prior = computePrior(labels)
 
 #testClassifier(BayesClassifier(), dataset='iris', split=0.7)
@@ -151,8 +181,8 @@ prior = computePrior(labels)
 # Call the `testClassifier` and `plotBoundary` functions for this part.
 
 
-testClassifier(BayesClassifier(), dataset='iris', split=0.7)
-plotBoundary(BayesClassifier(), dataset='iris',split=0.7)
+#testClassifier(BayesClassifier(), dataset='iris', split=0.7)
+#plotBoundary(BayesClassifier(), dataset='iris',split=0.7)
 
 #testClassifier(BayesClassifier(), dataset='vowel', split=0.7)
 #plotBoundary(BayesClassifier(), dataset='vowel', split=0.7)
