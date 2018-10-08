@@ -220,13 +220,6 @@ plotBoundary(BayesClassifier(), dataset='vowel', split=0.7)'''
 #
 # The lab descriptions state what each function should do.
 
-#def computeDelta(mu, sigma, x, c):
-
-
-def getWeightedError(mu, sigma, w, x):
-    for i in range(0, N):
-        w[i]*(1 - delta())
-
 # in: base_classifier - a classifier of the type that we will boost, e.g. BayesClassifier
 #                   X - N x d matrix of N data points
 #              labels - N vector of class labels
@@ -322,9 +315,9 @@ plotBoundary(BoostClassifier(BayesClassifier(), T=10), dataset='iris', split=0.7
 
 
 
-'''print ("\n \nBoostClassifier - Vowels")
+print ("\n \nBoostClassifier - Vowels")
 testClassifier(BoostClassifier(BayesClassifier(), T=10), dataset='vowel',split=0.7)
-plotBoundary(BoostClassifier(BayesClassifier(), T=10), dataset='vowel', split=0.7)'''
+#plotBoundary(BoostClassifier(BayesClassifier(), T=10), dataset='vowel', split=0.7)
 
 
 
@@ -332,7 +325,7 @@ plotBoundary(BoostClassifier(BayesClassifier(), T=10), dataset='vowel', split=0.
 
 
 # Now repeat the steps with a decision tree classifier.
-
+'''
 print ("\nIris decision tree classifier")
 #testClassifier(DecisionTreeClassifier(), dataset='iris', split=0.7)
 plotBoundary(DecisionTreeClassifier(), dataset='iris',split=0.7)
@@ -352,7 +345,7 @@ plotBoundary(BoostClassifier(DecisionTreeClassifier(), T=10), dataset='vowel',sp
 
 
 
-
+'''
 
 
 
