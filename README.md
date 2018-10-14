@@ -13,7 +13,19 @@
 
 * Different points may have different importance when it comes to deciding the boundary. It could be possible to change the weights of these points so that they may or may not effect the boundary in a different way.
 
-#### 3. If you had to pick a classifier, naive Bayes or a decision tree or the boosted versions of these, which one would you pick? Motivate from the following criteria:
+#### 3. 
+(1) Is there any improvement in classification accuracy? Why/why not?  
+
+(2) Plot the decision boundary of the boosted classifier on iris and compare it with
+that of the basic. What differences do you notice? Is the boundary of the boosted
+version more complex?  
+
+(3) Can we make up for not using a more advanced model in the basic classifier
+(e.g. independent features) by using boosting?  
+
+
+
+#### 4. If you had to pick a classifier, naive Bayes or a decision tree or the boosted versions of these, which one would you pick? Motivate from the following criteria:
 
 * Outliers  
 Bayes without boosting, boosting will tend to focus on the outliers and screw up the classifier.
