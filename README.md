@@ -15,11 +15,16 @@
 
 #### 3. 
 ##### (1) Is there any improvement in classification accuracy? Why/why not?  
+naive bayes: Yes the classification accuracy is improved, we can see the boundary is much better.  
+decision tree: Yes the classification accuracy is improved, we can see the boundary is much better.  
 
 ##### (2) Plot the decision boundary of the boosted classifier on iris and compare it with that of the basic. What differences do you notice? Is the boundary of the boosted version more complex?  
+naive bayes: The boundary is better, i don't know if it is more complex.
+decision tree: The boundary is better, yes the boundary seems more complex with its twists and turns.
 
 ##### (3) Can we make up for not using a more advanced model in the basic classifier (e.g. independent features) by using boosting?  
-
+naive bayes: Yes we can definitely. 
+decision tree: Yes we can definitely.
 
 
 #### 4. If you had to pick a classifier, naive Bayes or a decision tree or the boosted versions of these, which one would you pick? Motivate from the following criteria:
