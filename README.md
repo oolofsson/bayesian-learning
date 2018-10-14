@@ -15,14 +15,13 @@
 
 ### 3. If you had to pick a classifier, naive Bayes or a decision tree or the boosted versions of these, which one would you pick? Motivate from the following criteria:
 
-* Outliers
+* Outliers  
 Bayes without boosting, boosting will tend to focus on the outliers and screw up the classifier.
-* Irrelevant inputs: part of the feature space is irrelevant
+* Irrelevant inputs: part of the feature space is irrelevant  
 Decision Trees with boosting, will focus on adding as much information gain as possible and not care about irrelevant inputs.
-* Predictive power
+* Predictive power  
 Naive Bayes with boosting, naive bayes will build distributions which makes better predictions.
-* Mixed types of data: binary, categorical or continuous features, etc.
+* Mixed types of data: binary, categorical or continuous features, etc.  
 Naive Bayes can adapt the maximum likelihood estimation based on the distribution and thus probably perform better, boosting will make it even better since it will compare the performance of these distributions.
-* Scalability: the dimension of the data, D, is large or the number of instances,
-N, is large, or both.
+* Scalability: the dimension of the data, D, is large or the number of instances, N, is large, or both.  
 Decision Trees will perform better on large datasets.
