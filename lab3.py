@@ -190,8 +190,8 @@ for h in range(0,200):
 
 weights = np.array(weights)
 
-X, labels = genBlobs(centers=5)
-mu, sigma = mlParams2(X,labels, weights)
+#X, labels = genBlobs(centers=5)
+#mu, sigma = mlParams2(X,labels, weights)
 
 #classifyBayes(X, prior, mu, sigma)
 
@@ -255,9 +255,9 @@ def trainBoost(base_classifier, X, labels, T=10):
 
         alphaSign = (delta-.5)/(-.5)
         wCur = wCur * (np.exp(alphaSign*alpha))
-        #Z = np.sum(wCur)
-        Z = np.full(Npts, sum(wCur))
-        wCur / Z
+        Z = np.sum(wCur)
+        #Z = np.full(Npts, sum(wCur))
+        wCur /= Z
         alphas.append(alpha) # you will need to append the new alpha
 
     #print ("classifiers ", classifiers)
@@ -309,14 +309,14 @@ class BoostClassifier(object):
 #
 # Call the `testClassifier` and `plotBoundary` functions for this part.
 
-'''print ("\n \nBoostClassifier - Iris")
-testClassifier(BoostClassifier(BayesClassifier(), T=10), dataset='iris',split=0.7)
-plotBoundary(BoostClassifier(BayesClassifier(), T=10), dataset='iris', split=0.7)'''
+#print ("\n \nBoostClassifier - Iris")
+#testClassifier(BoostClassifier(BayesClassifier(), T=10), dataset='iris',split=0.7)
+#plotBoundary(BoostClassifier(BayesClassifier(), T=10), dataset='iris', split=0.7)
 
 
 
-print ("\n \nBoostClassifier - Vowels")
-testClassifier(BoostClassifier(BayesClassifier(), T=10), dataset='vowel',split=0.7)
+#print ("\n \nBoostClassifier - Vowels")
+#testClassifier(BoostClassifier(BayesClassifier(), T=10), dataset='vowel',split=0.7)
 #plotBoundary(BoostClassifier(BayesClassifier(), T=10), dataset='vowel', split=0.7)
 
 
@@ -325,19 +325,19 @@ testClassifier(BoostClassifier(BayesClassifier(), T=10), dataset='vowel',split=0
 
 
 # Now repeat the steps with a decision tree classifier.
-'''
-print ("\nIris decision tree classifier")
+
+#print ("\nIris decision tree classifier")
 #testClassifier(DecisionTreeClassifier(), dataset='iris', split=0.7)
-plotBoundary(DecisionTreeClassifier(), dataset='iris',split=0.7)
+#plotBoundary(DecisionTreeClassifier(), dataset='iris',split=0.7)
 
 print ("\n \nIris decision tree classifier - boost classifier")
 #testClassifier(BoostClassifier(DecisionTreeClassifier(), T=10), dataset='iris',split=0.7)
 plotBoundary(BoostClassifier(DecisionTreeClassifier(), T=10), dataset='iris',split=0.7)
 
 
-print ("\n \nVowel decision tree classifier")
+#print ("\n \nVowel decision tree classifier")
 #testClassifier(DecisionTreeClassifier(), dataset='vowel',split=0.7)
-plotBoundary(DecisionTreeClassifier(), dataset='vowel',split=0.7)
+#plotBoundary(DecisionTreeClassifier(), dataset='vowel',split=0.7)
 
 print ("\n \nVowel decision tree classifier - boost classifier")
 #testClassifier(BoostClassifier(DecisionTreeClassifier(), T=10), dataset='vowel',split=0.7)
@@ -380,3 +380,4 @@ plotBoundary(BoostClassifier(DecisionTreeClassifier(), T=10), dataset='vowel',sp
 # visualize the test point together with the training points used to train
 # the class that the test point was classified to belong to
 #visualizeOlivettiVectors(xTr[yTr == yPr[testind],:], xTe[testind,:])
+'''
