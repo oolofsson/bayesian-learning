@@ -200,15 +200,6 @@ weights = np.array(weights)
 #prior = computePrior(labels)
 
 # Call the `testClassifier` and `plotBoundary` functions for this part.
-'''print ("\nBayesClassifier - Iris ")
-testClassifier(BayesClassifier(), dataset='iris', split=0.7)
-plotBoundary(BayesClassifier(), dataset='iris',split=0.7)
-
-
-print ("\n \nBayesClassifier - Vowels")
-testClassifier(BayesClassifier(), dataset='vowel', split=0.7)
-plotBoundary(BayesClassifier(), dataset='vowel', split=0.7)'''
-
 #testClassifier(BayesClassifier(), dataset='wine', split=0.7)
 #plotBoundary(BayesClassifier(), dataset='wine',split=0.7)
 
@@ -309,14 +300,24 @@ class BoostClassifier(object):
 #
 # Call the `testClassifier` and `plotBoundary` functions for this part.
 
+#print ("\nBayesClassifier - Iris ")
+#testClassifier(BayesClassifier(), dataset='iris', split=0.7)
+#plotBoundary(BayesClassifier(), dataset='iris',split=0.7)
+
+
+#print ("\n \nBayesClassifier - Vowels")
+#testClassifier(BayesClassifier(), dataset='vowel', split=0.7)
+#plotBoundary(BayesClassifier(), dataset='vowel', split=0.7)
+
+
 #print ("\n \nBoostClassifier - Iris")
-#testClassifier(BoostClassifier(BayesClassifier(), T=10), dataset='iris',split=0.7)
+testClassifier(BoostClassifier(BayesClassifier(), T=10), dataset='iris',split=0.7)
 #plotBoundary(BoostClassifier(BayesClassifier(), T=10), dataset='iris', split=0.7)
 
 
 
 #print ("\n \nBoostClassifier - Vowels")
-#testClassifier(BoostClassifier(BayesClassifier(), T=10), dataset='vowel',split=0.7)
+testClassifier(BoostClassifier(BayesClassifier(), T=10), dataset='vowel',split=0.7)
 #plotBoundary(BoostClassifier(BayesClassifier(), T=10), dataset='vowel', split=0.7)
 
 
@@ -330,18 +331,18 @@ class BoostClassifier(object):
 #testClassifier(DecisionTreeClassifier(), dataset='iris', split=0.7)
 #plotBoundary(DecisionTreeClassifier(), dataset='iris',split=0.7)
 
-print ("\n \nIris decision tree classifier - boost classifier")
+#print ("\n \nIris decision tree classifier - boost classifier")
 #testClassifier(BoostClassifier(DecisionTreeClassifier(), T=10), dataset='iris',split=0.7)
-plotBoundary(BoostClassifier(DecisionTreeClassifier(), T=10), dataset='iris',split=0.7)
+#plotBoundary(BoostClassifier(DecisionTreeClassifier(), T=10), dataset='iris',split=0.7)
 
 
 #print ("\n \nVowel decision tree classifier")
 #testClassifier(DecisionTreeClassifier(), dataset='vowel',split=0.7)
 #plotBoundary(DecisionTreeClassifier(), dataset='vowel',split=0.7)
 
-print ("\n \nVowel decision tree classifier - boost classifier")
+#print ("\n \nVowel decision tree classifier - boost classifier")
 #testClassifier(BoostClassifier(DecisionTreeClassifier(), T=10), dataset='vowel',split=0.7)
-plotBoundary(BoostClassifier(DecisionTreeClassifier(), T=10), dataset='vowel',split=0.7)
+#plotBoundary(BoostClassifier(DecisionTreeClassifier(), T=10), dataset='vowel',split=0.7)
 
 
 
