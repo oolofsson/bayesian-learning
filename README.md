@@ -5,7 +5,7 @@
 #### 1. When can a feature independence assumption be reasonable and when not?
 
 * A reasonable assumption of an independent feature would be when the feature is not related to anything else. For example a persons height is not related to whether the person is right or left handed.
-* A non reasonable feature independence assumption would be when assuming that something is independent when in fact there are no occurrences between the class label and a feature. This leads to a likelihood of 0. And is thus not a reasonable assumption of independence, as there is no data to back it back up.
+* A non reasonable independence assumption would be to assume that things that are clearly influenced by each other are independent. For example a person's weight and height.
 
 #### 2. How does the decision boundary look for the Iris dataset? How could one improve the classification results for this scenario by changing classifier or, alternatively, manipulating the data?
 
@@ -13,7 +13,21 @@
 
 * Different points may have different importance when it comes to deciding the boundary. It could be possible to change the weights of these points so that they may or may not effect the boundary in a different way.
 
-#### 3. If you had to pick a classifier, naive Bayes or a decision tree or the boosted versions of these, which one would you pick? Motivate from the following criteria:
+#### 3. 
+##### (1) Is there any improvement in classification accuracy? Why/why not?  
+naive bayes: Yes the classification accuracy is improved, we can see the boundary is much better.  
+decision tree: Yes the classification accuracy is improved, we can see the boundary is much better.  
+
+##### (2) Plot the decision boundary of the boosted classifier on iris and compare it with that of the basic. What differences do you notice? Is the boundary of the boosted version more complex?  
+naive bayes: The boundary is better, i don't know if it is more complex.
+decision tree: The boundary is better, yes the boundary seems more complex with its twists and turns.
+
+##### (3) Can we make up for not using a more advanced model in the basic classifier (e.g. independent features) by using boosting?  
+naive bayes: Yes we can definitely. 
+decision tree: Yes we can definitely.
+
+
+#### 4. If you had to pick a classifier, naive Bayes or a decision tree or the boosted versions of these, which one would you pick? Motivate from the following criteria:
 
 * Outliers  
 Bayes without boosting, boosting will tend to focus on the outliers and screw up the classifier.
